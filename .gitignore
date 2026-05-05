@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vite/
+*.local
+*.log
+
+# Browser smoke-test profiles and screenshots
+edge-test-profile/
+battleshop-smoke.png

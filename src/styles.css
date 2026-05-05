@@ -1,0 +1,799 @@
+:root {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: #fff1c7;
+  background: #203b20;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+p,
+small,
+span {
+  color: #e8d9a8;
+}
+
+.game-screen {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  image-rendering: pixelated;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(250, 236, 119, 0.28) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 62%, rgba(22, 84, 36, 0.55) 0 4px, transparent 5px),
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(16, 65, 31, 0.24) 31px),
+    repeating-linear-gradient(0deg, transparent 0 30px, rgba(16, 65, 31, 0.2) 31px),
+    #2d7a37;
+  background-size: 78px 78px, 92px 92px, 32px 32px, 32px 32px, auto;
+}
+
+.pixel-map {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 760px;
+  height: 520px;
+  transform: translate(-50%, -50%);
+}
+
+.field-map {
+  width: 760px;
+  height: 460px;
+  border: 3px solid rgba(26, 54, 27, 0.75);
+  box-shadow: 0 0 0 999px rgba(45, 122, 55, 0.2);
+}
+
+.shop-map {
+  left: 34%;
+}
+
+.field-details,
+.outside-grass {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 11% 12%, #d1e56e 0 2px, transparent 3px),
+    radial-gradient(circle at 41% 50%, #143f26 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 28%, #a6da63 0 2px, transparent 3px),
+    repeating-linear-gradient(45deg, transparent 0 29px, rgba(237, 229, 112, 0.52) 30px 32px, transparent 33px 64px);
+  background-size: 90px 90px, 128px 128px, 118px 118px, 112px 112px;
+}
+
+.tavern {
+  position: absolute;
+  left: 62px;
+  top: 112px;
+  width: 620px;
+  height: 350px;
+  background:
+    linear-gradient(90deg, rgba(67, 38, 18, 0.42) 1px, transparent 1px),
+    linear-gradient(rgba(67, 38, 18, 0.45) 1px, transparent 1px),
+    repeating-linear-gradient(90deg, #78451e 0 30px, #8b5224 30px 60px);
+  background-size: 16px 16px, 16px 16px, auto;
+  box-shadow: inset 0 0 0 4px #3a2112;
+}
+
+.wall {
+  position: absolute;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.28) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.28) 1px, transparent 1px),
+    #4b2816;
+  background-size: 32px 16px;
+  border: 2px solid #1b120d;
+}
+
+.wall.top,
+.wall.bottom {
+  left: 0;
+  width: 620px;
+  height: 28px;
+}
+
+.wall.top {
+  top: 0;
+}
+
+.wall.bottom {
+  bottom: 0;
+}
+
+.wall.left,
+.wall.right {
+  top: 0;
+  width: 30px;
+  height: 350px;
+}
+
+.wall.left {
+  left: 0;
+}
+
+.wall.right {
+  right: 0;
+}
+
+.shop-sign {
+  position: absolute;
+  top: -13px;
+  left: 365px;
+  padding: 0 4px;
+  color: #ffe18f;
+  font-weight: 900;
+  text-shadow: 2px 2px #40250f;
+}
+
+.shop-sign::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 28px;
+  left: 50%;
+  top: 15px;
+  transform: translateX(-50%);
+  background: #2a8d34;
+  border: 3px solid #25451d;
+}
+
+.counter-table {
+  position: absolute;
+  left: 95px;
+  top: 118px;
+  width: 150px;
+  height: 68px;
+  background: #6b3c19;
+  border: 4px solid #2b1a0f;
+  box-shadow: inset 0 0 0 5px #a56024, 14px 14px 0 rgba(0, 0, 0, 0.28);
+}
+
+.counter-table::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -36px;
+  width: 150px;
+  height: 30px;
+  background: #b36525;
+  border: 4px solid #542f14;
+  box-shadow: inset 0 0 0 4px #d18434;
+}
+
+.crate {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background:
+    linear-gradient(45deg, transparent 45%, #5b3217 46% 54%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, #5b3217 46% 54%, transparent 55%),
+    #a96a2d;
+  border: 4px solid #3c2312;
+}
+
+.crate-a {
+  right: 22px;
+  top: 180px;
+}
+
+.crate-b {
+  right: 22px;
+  top: 230px;
+}
+
+.rug {
+  position: absolute;
+  right: 86px;
+  top: 64px;
+  width: 90px;
+  height: 46px;
+  background: #d49a4f;
+  box-shadow: inset 0 0 0 5px #e7b469;
+}
+
+.hero-sprite,
+.shopkeeper,
+.monster-sprite,
+.loot,
+.tree,
+.bush,
+.stone {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated;
+}
+
+.hero-sprite {
+  width: 30px;
+  height: 38px;
+  background: #7b4523;
+  border: 3px solid #2a1b14;
+  box-shadow: inset 0 -10px #2d4d8e, 8px 6px 0 rgba(0, 0, 0, 0.28);
+  z-index: 3;
+}
+
+.hero-sprite::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: -10px;
+  width: 20px;
+  height: 17px;
+  background: #5b2e18;
+  border: 3px solid #23140e;
+}
+
+.hero-sprite span {
+  position: absolute;
+  right: -14px;
+  top: 18px;
+  width: 22px;
+  height: 7px;
+  background: #bcc8d4;
+  border: 2px solid #27313c;
+  transform: rotate(-20deg);
+}
+
+.shop-hero {
+  left: 250px;
+  top: 205px;
+}
+
+.battle-hero {
+  z-index: 5;
+}
+
+.shopkeeper {
+  right: 125px;
+  top: 82px;
+  width: 28px;
+  height: 37px;
+  background: #c89459;
+  border: 3px solid #2c1a11;
+  box-shadow: inset 0 -12px #305b32, 7px 6px 0 rgba(0, 0, 0, 0.28);
+  z-index: 3;
+}
+
+.shopkeeper.waiting {
+  filter: saturate(0.75);
+}
+
+.tree {
+  width: 45px;
+  height: 45px;
+  background: #2fa942;
+  border: 4px solid #0d4f25;
+  border-radius: 7px;
+  box-shadow:
+    -10px 8px 0 #1f6b32,
+    7px 10px 0 #1f6b32,
+    0 20px 0 #583315;
+}
+
+.tree-a {
+  left: 44px;
+  top: 135px;
+}
+
+.tree-b {
+  left: 70px;
+  bottom: 35px;
+}
+
+.tree-c {
+  left: 82%;
+  top: 8%;
+}
+
+.tree-d {
+  left: 5%;
+  top: 9%;
+}
+
+.path-exit {
+  position: absolute;
+  right: -70px;
+  top: 76px;
+  width: 92px;
+  height: 520px;
+  background: rgba(77, 150, 76, 0.7);
+  border-left: 4px solid rgba(30, 85, 36, 0.55);
+}
+
+.bush {
+  width: 24px;
+  height: 24px;
+  background: #37a448;
+  border: 3px solid #146329;
+  border-radius: 5px;
+  box-shadow: 7px 5px 0 #1f7832;
+}
+
+.bush-a {
+  left: 15%;
+  top: 46%;
+}
+
+.bush-b {
+  left: 60%;
+  top: 82%;
+}
+
+.stone {
+  width: 33px;
+  height: 28px;
+  background: #999b97;
+  border: 4px solid #4f514f;
+  box-shadow: inset 4px 4px #c8cac3;
+}
+
+.stone-a {
+  left: 18%;
+  top: 18%;
+}
+
+.stone-b {
+  left: 52%;
+  top: 37%;
+}
+
+.stone-c {
+  left: 28%;
+  top: 90%;
+}
+
+.monster-sprite {
+  width: 28px;
+  height: 30px;
+  background: #b34a39;
+  border: 3px solid #3c1714;
+  box-shadow: inset 0 -10px #6d201c, 7px 5px 0 rgba(0, 0, 0, 0.26);
+  z-index: 4;
+}
+
+.monster-sprite::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: -8px;
+  width: 15px;
+  height: 11px;
+  background: #7c241f;
+  border: 2px solid #32100d;
+}
+
+.monster-sprite.boss {
+  width: 44px;
+  height: 48px;
+  background: #80439e;
+  border-color: #351849;
+  box-shadow: inset 0 -16px #4a2560, 9px 7px 0 rgba(0, 0, 0, 0.3);
+}
+
+.mini-hp {
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: -13px;
+  height: 6px;
+  background: #24170f;
+  border: 1px solid #49351e;
+}
+
+.mini-hp span {
+  display: block;
+  height: 100%;
+  background: #e5524d;
+}
+
+.loot {
+  width: 25px;
+  height: 25px;
+  border: 3px solid #21160f;
+  border-radius: 2px;
+  color: #21170d;
+  font-weight: 900;
+  z-index: 6;
+}
+
+.loot.gold {
+  background: #f2d36b;
+}
+
+.loot.common {
+  background: #cfd5d0;
+}
+
+.loot.uncommon {
+  background: #58d46c;
+}
+
+.loot.rare {
+  background: #4aa3ff;
+}
+
+.pixel-hud,
+.quest-bar,
+.loot-tip,
+.rarity-strip,
+.pixel-panel {
+  background: rgba(28, 37, 21, 0.94);
+  border: 3px solid #5a4b34;
+  box-shadow: inset 0 0 0 2px #1c140c;
+}
+
+.pixel-hud {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 20;
+  width: 190px;
+  padding: 7px 9px;
+  display: grid;
+  gap: 5px;
+}
+
+.hud-hp {
+  height: 8px;
+  background: #271412;
+  border: 2px solid #20100e;
+}
+
+.hud-hp i {
+  display: block;
+  height: 100%;
+  background: #e15c56;
+}
+
+.leave-button {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 20;
+  min-height: 34px;
+  padding: 0 14px;
+  background: rgba(28, 37, 21, 0.94);
+  border: 3px solid #5a4b34;
+  color: #ffe6a3;
+}
+
+.quest-bar {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  z-index: 20;
+  max-width: min(680px, calc(100vw - 12px));
+  padding: 8px 11px;
+  color: #ecf3c5;
+  font-weight: 700;
+}
+
+.loot-tip {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 20;
+  padding: 8px 11px;
+  color: #fff0c0;
+  font-weight: 700;
+}
+
+.rarity-strip {
+  position: absolute;
+  right: 6px;
+  top: 54px;
+  z-index: 20;
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+}
+
+.rarity-strip span {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.rarity-strip i {
+  width: 11px;
+  height: 11px;
+}
+
+.shop-board {
+  position: absolute;
+  right: 14px;
+  top: 58px;
+  bottom: 48px;
+  z-index: 15;
+  width: min(520px, 41vw);
+  padding: 12px;
+  overflow: auto;
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.panel-title h1 {
+  font-size: 24px;
+}
+
+.panel-title span {
+  text-align: right;
+  max-width: 260px;
+}
+
+.stage-row,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stage-row {
+  margin-bottom: 12px;
+}
+
+.stage-row button,
+.primary,
+.secondary,
+.slot-actions button,
+.upgrade-row {
+  min-height: 32px;
+  padding: 0 10px;
+  background: #2d2a25;
+  border: 2px solid #6a5737;
+  color: #ffe6a3;
+}
+
+.stage-row button.selected {
+  border-color: #f2d36b;
+  color: #f2d36b;
+}
+
+.primary {
+  background: #c47c2f;
+  border-color: #f2b35f;
+  color: #21170d;
+  font-weight: 900;
+}
+
+.secondary {
+  background: #345c63;
+  border-color: #6da0a7;
+}
+
+.shop-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.9fr);
+  gap: 12px;
+}
+
+.section-title,
+.stat-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.spaced {
+  margin-top: 14px;
+}
+
+.slots {
+  display: grid;
+  gap: 7px;
+}
+
+.sale-slots {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.inventory-slots {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.slot,
+.inventory-entry {
+  min-height: 82px;
+}
+
+.slot {
+  width: 100%;
+  border: 2px dashed #6a5737;
+  background: rgba(26, 22, 19, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  text-align: center;
+}
+
+.empty {
+  color: #8c8069;
+}
+
+.item-slot {
+  border-style: solid;
+}
+
+.item-card {
+  display: grid;
+  gap: 3px;
+  justify-items: center;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.item-pixel {
+  width: 18px;
+  height: 18px;
+  box-shadow:
+    5px 0 rgba(0, 0, 0, 0.25),
+    0 5px rgba(255, 255, 255, 0.16);
+}
+
+.item-card strong {
+  font-size: 12px;
+}
+
+.item-card small {
+  font-size: 10px;
+}
+
+.item-card b,
+.upgrade-row b {
+  color: #f2d36b;
+}
+
+.inventory-entry {
+  display: grid;
+  gap: 5px;
+}
+
+.slot-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.slot-actions button {
+  min-height: 26px;
+  padding: 0 4px;
+  font-size: 12px;
+}
+
+.equipment-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.equipment-slot {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  align-items: center;
+  gap: 8px;
+  text-transform: capitalize;
+}
+
+.stats-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+
+.stats-box div {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+  border: 2px solid #5a4b34;
+  background: rgba(26, 22, 19, 0.9);
+}
+
+.upgrade-list {
+  display: grid;
+  gap: 7px;
+}
+
+.upgrade-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  text-align: left;
+}
+
+.upgrade-row span {
+  display: grid;
+  gap: 3px;
+}
+
+.battle-result {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: min(340px, calc(100% - 28px));
+  transform: translate(-50%, -50%);
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  text-align: center;
+  z-index: 25;
+}
+
+@media (max-width: 980px) {
+  body {
+    overflow: auto;
+  }
+
+  .game-screen {
+    min-height: 900px;
+  }
+
+  .pixel-map {
+    left: 50%;
+    top: 330px;
+    transform: translateX(-50%) scale(0.78);
+    transform-origin: top center;
+  }
+
+  .field-map {
+    width: 760px;
+    height: 460px;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.86);
+  }
+
+  .shop-board {
+    left: 8px;
+    right: 8px;
+    top: 560px;
+    bottom: auto;
+    width: auto;
+    max-height: none;
+  }
+
+  .shop-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .loot-tip,
+  .rarity-strip {
+    display: none;
+  }
+}
